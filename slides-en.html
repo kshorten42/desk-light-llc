@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Ladies Learning Code</title>
+    <link rel="stylesheet" href="framework/css/slideshow.css" data-noprefix>
+    <link rel="stylesheet" href="framework/css/fonts.css" data-noprefix>
+    <link rel="stylesheet" href="framework/css/highlightjs/github.css" data-noprefix>
+    <link rel="stylesheet" href="framework/css/styles.css" data-noprefix>
+    <link rel="shortcut icon" href="framework/img/favicon.ico">
+
+    <!-- Takes care of CSS3 prefixes -->
+    <script src="framework/scripts/prefixfree.min.js"></script>
+
+    <!-- opens all links in a new window -->
+    <base target="_blank">
+</head>
+
+<!-- Timer/progress bar: Define the presentation duration using "data-duration" in minutes. -->
+<body class="en" data-duration="360">
+
+<main>
+    <section class="slide welcome highlight">
+        <h1><img class="logo-stacked" src="framework/img/llc-logo-stacked-white.png" alt="Ladies Learning Code logo">Welcome!
+        </h1>
+
+        <div class="instructions">
+            <!-- ADD WIFI INFO HERE -->
+            <h2>Get <br>Connected</h2>
+            <p><strong>Wifi:</strong> wifi network</p>
+            <p><strong>Password:</strong> wifi password</p>
+            <hr>
+
+            <h2>Download<br> & Install</h2>
+            <ol class="downloads">
+                <li>Learner files (zip file): <a
+                        href="https://github.com/ladieslearningcode/workshop-repo-name/archive/master.zip">http://bit.ly/create-custom-url</a>
+                    <ul>
+                        <li>unzip the learner file (<em>extract all</em> if you’re on a PC)</li>
+                        <li>open <em>slides.html</em> in the browser to view the slides</li>
+                    </ul>
+                </li>
+                <li>Arduino Create: <a href="https://create.arduino.cc/">https://create.arduino.cc/</a></li>
+                <li>Chrome Browser: <a
+                        href="https://www.google.ca/chrome/browser/desktop/">https://www.google.ca/chrome</a></li>
+                </li>
+            </ol>
+        </div>
+        <footer>
+            <a class="left" rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                    alt="Creative Commons License" src="framework/img/cc-by-nc.png"/></a>
+            <p class="left">Content created by <a href="http://routeique.com">Eric Moon, Rio Nicholas, Kelsey
+                Shorten</a> for <a prefix="cc: http://creativecommons.org/ns#" href="http://ladieslearningcode.com"
+                                   property="cc:attributionName" rel="cc:attributionURL">Ladies Learning Code</a></p>
+            <p class="right">Use the left <span class="arrow">&#8592;</span> and right <span
+                    class="arrow">&#8594;</span> arrow keys to navigate</p>
+        </footer>
+    </section>
+
+    <section class="slide intro">
+        <img class="logo" src="framework/img/llc-logo-white.png" alt="Ladies Learning Code logo">
+        <h1 class="heading-bg">
+        <span>Introduction to MicroControllers:<br>
+        Sound Reactive Desk Light</span>
+        </h1>
+
+        <!-- FILL IN INSTRUCTOR DETAILS -->
+        <img class="instructor" src="http://placehold.it/225x225" alt="Instructor Name">
+        <h2><span class="cursive">with</span> Eric, Kelsey & Rio</h2>
+        <ul>
+            <li><a href="mailto:">eric@routeique.com</a></li>
+            <li><a href="http://routeique.com">routeique.com</a></li>
+            <li><a href="http://twitter.com/">@twitter</a></li>
+        </ul>
+
+        <div class="sponsor">
+            <p>In partnership with<br> <img src="framework/img/telus-logo-white.svg" alt="Telus"></p>
+        </div>
+        <footer>
+            <a class="left" rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                    alt="Creative Commons License" src="framework/img/cc-by-nc.png"/></a>
+            <p class="left">Content created by <a href="http://christinatruong.com">Kelsey Shorten, Eric Moon, Rio
+                Nicholas</a> for <a prefix="cc: http://creativecommons.org/ns#" href="http://ladieslearningcode.com"
+                                    property="cc:attributionName" rel="cc:attributionURL">Ladies Learning Code</a></p>
+            <p class="right">Use the left <span class="arrow">&#8592;</span> and right <span
+                    class="arrow">&#8594;</span> arrow keys to navigate</p>
+        </footer>
+    </section>
+
+    <section class="slide centered" data-markdown data-toc>
+        <script type="text/template">
+            # Today's Project
+            A music reactive desk light using Arduino\!
+
+        </script>
+    </section>
+    <section class="slide" data-markdown data-toc>
+
+        <script type="text/template">
+            # Course Outline
+
+            <div class="table-of-contents"></div>
+        </script>
+    </section>
+
+    <section class="slide title" data-markdown data-toc>
+        <script type="text/template">
+            # Hardware
+        </script>
+    </section>
+
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            #Micro Controllers
+            What is a Micro controller?
+
+            <img src="framework/img/workshop/microcontroller.png" width="400px" align="right"> </img>
+            <ul>
+                <li class="delayed"> A full computer system on a single chip. Even if its resources are far more limited
+                    than that of a regular desktop or laptop computer
+                </li>
+                <li class="delayed"> Designed for stand alone operations and can operate in extremely low power
+                    condition
+                </li>
+            </ul>
+
+        </script>
+    </section>
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            #Micro Controllers
+            Why would you use a Micro controller?
+
+            * Bridge the world of hardware and software
+            * Self contained form factor (All in one architecture)
+            * Low power scenarios
+            * No need for higher level processing
+
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            #Micro Controllers
+            Micro controllers do three basic things
+
+            1. Gathers Input
+            1. Processes
+            1. Creates output
+
+            <img src="framework/img/workshop/needInput.jpg" width="300px" class="delayed">
+            -><!-- .element: class="delayed" -->
+            <img src="framework/img/workshop/processing-gif-5.gif" width="300 px" class="delayed">
+            -><!-- .element: class="delayed" -->
+            <img src="framework/img/workshop/flexibleLED.gif" width="300 px" class="delayed">
+
+        </script>
+    </section>
+
+    <section class="slide centered" data-markdown>
+        <script type="text/template">
+            #Meet the Arduino Nano
+
+            <img src="framework/img/workshop/arduino.jpg">
+
+        </script>
+    </section>
+
+    <section class="slide title" data-markdown>
+        <script type="text/template">
+            # Electricity
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Electricity: Safety First
+
+            Electricity is dangerous. Even at 5V
+
+
+            - **Don’t plug anything in until you are expressly instructed to do so.  Not following this simple instruction could result in  catastrophic component failure or potential bodily harm.**
+            - Keep hands dry
+            - Keep water and other liquids clear of the work area
+            - Please do not insert components into oral cavity
+            ---
+            <img src="framework/img/workshop/danger-electric-shock-risk-printable-sign.gif" align="left">
+            <small align="right"> *Or, you know, a mild tingle*</small>
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Electricity: Power it Up
+
+            Positive + Negative
+
+            - You need both to complete a circuit
+            - The wires can be any color but typically follow a red/black or red/white convention
+            ---
+            **Did you know?** <!-- .element: class="note" -->
+
+            Electrons flow from the NEGATIVE terminal to the POSITIVE terminal. <!-- .element: class="note" -->
+
+            (Anyone know why?)<!-- .element: class="note" -->
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Electricity: AC vs DC Electricity
+
+            * AC stands for Alternating Current <!-- .element: class="delayed" -->
+            * DC for Direct Current <!-- .element: class="delayed" -->
+            * Conversion <!-- .element: class="delayed" -->
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Electricity: Volts vs Amps
+
+            <img src="framework/img/workshop/voltage.jpg" align="right">
+            <p>Today we are working with:</p>
+
+            <ul>
+                <li>120V Original Source (Dangerous)</li>
+
+                <li>3.3 - 5V Transformed Source (Less Dangerous)</li>
+
+                <li>Up to 20A Original Source</li>
+
+                <li>Up to 2.5A Transformed Source</li>
+            </ul>
+
+
+        </script>
+    </section>
+
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Types of Circuits
+
+            <p>What’s a circuit?</p>
+
+            <ul>
+                <li>A closed loop that allows electrons to flow freely from a surplus of to a deficit</li>
+
+                <li>There are two main types of circuits.
+
+
+                    <ul>
+                        <li>Series</li>
+
+                        <li>Parallel</li>
+                    </ul>
+                </li>
+            </ul>
+
+
+            <img src="framework/img/workshop/circuits.jpg" align="right">
+            <p>We will be constructing a parallel circuit today</p>
+
+
+        </script>
+    </section>
+    <section class="slide title" data-markdown>
+        <script type="text/template">
+            # Components
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Component Review: Power Source
+            We already met our micro controller.
+            Let’s meet the rest of the team.
+
+            **Power pack/Power Source/Wall Plug/Wall Wart**
+
+
+            <img src="framework/img/workshop/wall-wart.jpg">
+
+        </script>
+    </section>
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            <h1 id="componentreviewinputs">Component Review: Inputs</h1>
+
+            <img src="framework/img/workshop/sound-sensor.jpg" align="right">
+
+            <p>So many inputs to choose from:</p>
+
+            <ul>
+                <li>Switches/Buttons</li>
+
+                <li>Light sensors</li>
+
+                <li>Temperature sensors</li>
+
+                <li>Ultrasonic range finders</li>
+
+                <li>Moisture sensors</li>
+
+
+            </ul>
+            <h2>Sensor we are using:</h2>
+            <ul>
+                <li>Sound sensor built into a module</li>
+            </ul>
+
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            <h1 id="componentreviewoutputs">Component Review: Outputs</h1>
+
+            <img src="framework/img/workshop/free-shipping-rgb-5m-5050-led-strip-light-5050-60-led-strip-light-5050-300-led._cpcn-multi-color-waterproof-led-strip-with-remote-control.jpg" align="right">
+
+            <p>So much output potential:</p>
+
+            <ul>
+                <li>Buzzers/Speakers</li>
+
+                <li>Visual signal generators</li>
+
+                <li>Motors and actuators</li>
+
+                <li>Ethernet packets</li>
+
+            </ul>
+
+            <h2> Our output: </h2>
+            <ul>
+                <li>LED in the form of a parallel array</li>
+            </ul>
+
+
+        </script>
+    </section>
+
+
+    <section class="slide title" data-markdown>
+        <script type="text/template">
+            # The Circuit
+        </script>
+    </section>
+
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Prototyping the Circuit
+            Ok. Let’s build our circuit.  Here is the electrical diagram.
+
+
+            <img src="framework/img/workshop/voltage.jpg">
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Prototyping the Circuit
+
+
+
+            <img src="framework/img/workshop/circuit-picture1.jpg">
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Testing the Circuit
+
+            1. Open **Arduino Create** [https://create.arduino.cc/]https://create.arduino.cc/
+            1. Login and go to the Arduino Web Editor
+            1. If you have not already installed the Arduino plugin, do so now
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Testing the Circuit
+
+            1. In the left hand panel, click the **import** button to upload the test_sketch from the learner files
+
+            <img src="framework/img/workshop/arduino_create1.PNG">
+
+            1. Alternately, copy paste the following code into the editor window:
+
+            ```c++
+
+            #include "FastLED.h"
+
+            // How many leds in your strip?
+            #define NUM_LEDS 60
+
+            // For led chips like Neopixels, which have a data line, ground, and power, you just
+            // need to define DATA_PIN.  For led chipsets that are SPI based (four wires - data, clock,
+            // ground, and power), like the LPD8806 define both DATA_PIN and CLOCK_PIN
+            #define DATA_PIN 6
+            #define CLOCK_PIN 13
+
+            // Define the array of leds
+            CRGB leds[NUM_LEDS];
+
+            void setup() {
+
+            FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+
+            }
+
+            void loop() {
+            // Turn the LED on, then pause
+            for (int i = 0; i < NUM_LEDS; i++)
+            leds[i] = CRGB(0, 255-2*i, 0+2*i);
+            FastLED.show();
+            delay(500);
+            // Now turn the LED off, then pause
+            for (int i = 0; i < NUM_LEDS; i++)
+            leds[i] = CRGB::Black;
+            FastLED.show();
+            delay(500);
+            }
+
+
+            ```
+            *Don't worry, we'll go over all this code later! For now, we just want to see that the circuit has been set up correctly*<!-- .element: class="note" -->
+
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Testing the Circuit
+
+            1. Plug in your Arduino board using the provided USB cable
+            1. Go to the Editor panel and click the dropdown menu to select your Arduino Board
+            1. Choose 'Board at COM3'
+            <img src="framework/img/workshop/arduino_create2.PNG">
+            1. Select COM3 under Ports
+            1. Select the correct Arduino board under Boards (Check with your instructor if you are unsure which Ardunio board is being used in this workshop)
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Testing the Circuit
+
+            1. To check your code, click the Verify button at the top left of the editor window.
+            1. If the code compiles, click the -> button to upload your sketch to the arduino
+            1. If you did everything correctly, your LED strip should begin to blink!
+            <img src="framework/img/workshop/loki-success.gif">
+        </script>
+    </section>
+
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Manufacturing
+            Now that we know the circuit is working, it's time to make things a little more permanent.
+
+            The best way to do this is to solder all the components together, but you can also use the less permenant (But less secure!) method of twisting all the wires together, and then wrapping them up with electrical tape.
+
+            There are several soldering stations around the room where the mentors can help you put everything together
+        </script>
+    </section>
+
+    <section class="slide two-col-list" data-markdown>
+        <script type="text/template">
+            # Soldering Dos and Donts
+            * **DO**
+            * Keep hair and clothing tied up and out of the way
+            * Use small amounts of soldering compound
+            * Lay out all your components beforehand. Check the orientation of all components before soldering
+            * Wash your hands after using solder! Solder contains lead, which is a poisonous metal
+
+            * **DON'T**
+            * Touch the board or components directly with the hot iron.
+            * Rest the iron on your workbench, or near live components. Always return it to its holder.
+            * Breathe in the fumes from hot solder
+        </script>
+    </section>
+
+    <section class="slide title" data-markdown>
+        <script type="text/template">
+            # The Code
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # Arduino Programing
+
+            Arduino programs are called "Sketches". A sketch is a single program uploaded to the microcontroller, that runs all the time when the microcontroller is powered on.
+
+            Sketches are written in C++
+
+            ---
+            ###Reference
+            [Arduino Language Reference] (https://www.arduino.cc/reference/en/)
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Structure of the program
+
+            The program  has three main sections:
+            * Imports: <!-- .element: class="delayed" -->
+            * This is the section where we bring in extra code libraries, and define variables for the rest of the program.
+            * Setup:
+            * Code in Setup runs once at the beginning of the program. This is the place where we will tell the program important information, like which pins our LED strip is attached to\
+            * Loop:
+            * Code in the Loop runs over and over again
+
+            ---
+            ###Reference
+            [Arduino Language Reference] (https://www.arduino.cc/reference/en/)
+
+
+        </script>
+    </section>
+
+</main>
+
+<script src="framework/scripts/jquery-1.11.0.min.js"></script>
+<script src="framework/scripts/slideshow.js"></script>
+
+<!-- Uncomment the plugins you need -->
+<script src="framework/scripts/plugins/css-edit.js"></script>
+<script src="framework/scripts/plugins/css-snippets.js"></script>
+<script src="framework/scripts/plugins/css-controls.js"></script>
+<!-- <script src="plugins/code-highlight.js"></script>-->
+
+<script src="framework/scripts/plugins/markdown/marked.js"></script>
+<script src="framework/scripts/plugins/markdown/markdown.js"></script>
+<script src="framework/scripts/plugins/highlight/highlight-8.4.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="framework/scripts/llc.js"></script>
+<script>
+    var slideshow = new SlideShow();
+
+    // Grabs all the .snippet elements
+    var snippets = document.querySelectorAll('.snippet');
+    for (var i = 0; i < snippets.length; i++) {
+        new CSSSnippet(snippets[i]);
+    }
+</script>
+</body>
+</html>
