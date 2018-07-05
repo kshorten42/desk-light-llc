@@ -447,9 +447,9 @@
 
             1. Plug in your Arduino board using the provided USB cable
             1. Go to the Editor panel and click the dropdown menu to select your Arduino Board
-            1. Choose 'Board at COM3'
+            1. Choose 'Board at COM3' (Windows) or 'Board at [fill in the correct mac thing here]' (Mac)
             <img src="framework/img/workshop/arduino_create2.PNG">
-            1. Select COM3 under Ports
+            1. Select COM3 / [fill in the correct mac thing here] under Ports
             1. Select the correct Arduino board under Boards (Check with your instructor if you are unsure which Ardunio board is being used in this workshop)
 
         </script>
@@ -481,16 +481,16 @@
     <section class="slide two-col-list" data-markdown>
         <script type="text/template">
             # Soldering Dos and Donts
-            * **DO**
-            * Keep hair and clothing tied up and out of the way
-            * Use small amounts of soldering compound
-            * Lay out all your components beforehand. Check the orientation of all components before soldering
-            * Wash your hands after using solder! Solder contains lead, which is a poisonous metal
+            - **DO**
+            - Keep hair and clothing tied up and out of the way
+            - Use small amounts of soldering compound
+            - Lay out all your components beforehand. Check the orientation of all components before soldering
+            - Wash your hands after using solder! Solder contains lead, which is a poisonous metal
 
-            * **DON'T**
-            * Touch the board or components directly with the hot iron.
-            * Rest the iron on your workbench, or near live components. Always return it to its holder.
-            * Breathe in the fumes from hot solder
+            - **DON'T**
+            - Touch the board or components directly with the hot iron.
+            - Rest the iron on your workbench, or near live components. Always return it to its holder.
+            - Breathe in the fumes from hot solder
         </script>
     </section>
 
@@ -500,13 +500,36 @@
         </script>
     </section>
 
+
+
     <section class="slide" data-markdown>
         <script type="text/template">
             # Arduino Programing
 
-            Arduino programs are called "Sketches". A sketch is a single program uploaded to the microcontroller, that runs all the time when the microcontroller is powered on.
+            Arduino programs are called "Sketches". A sketch is a single program uploaded to the microcontroller, that
+            runs all the time when the microcontroller is powered on.
 
-            Sketches are written in C++
+            When we clicked the "Compile and Upload" button in the previous step, the Arduino IDE put our program into the microcontroller's memory
+
+            <img src="framework/img/workshop/running.gif"/>
+
+
+
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # C++
+
+            Sketches are written in C++.
+
+            C++ is a *compiled* language. That means we have to run the program through a compiler, that reduces the C++
+            code to machine language that can be directly executed by the CPU of the microcontroller.
+
+            This is different from other languages that you may have worked with, like Python or Javascript, which are
+            intrepreted languages, which the computer 'compiles' line by line when you run it.
 
             ---
             ###Reference
@@ -519,13 +542,22 @@
         <script type="text/template">
             # Structure of the program
 
-            The program  has three main sections:
-            * Imports: <!-- .element: class="delayed" -->
-            * This is the section where we bring in extra code libraries, and define variables for the rest of the program.
-            * Setup:
-            * Code in Setup runs once at the beginning of the program. This is the place where we will tell the program important information, like which pins our LED strip is attached to\
-            * Loop:
-            * Code in the Loop runs over and over again
+            <p>The program  has three main sections:</p>
+            <ul>
+                <li>Imports: <!-- .element: class="delayed" --><ul>
+                    <li>This is the section where we bring in extra code libraries, and define variables for the rest of the program.</li>
+                </ul>
+                </li>
+                <li>Setup: <!-- .element: class="delayed" --><ul>
+                    <li>Code in Setup runs once at the beginning of the program. This is the place where we will tell the program important information, like which pins our LED strip is attached to\</li>
+                </ul>
+                </li>
+                <li>Loop: <!-- .element: class="delayed" --><ul>
+                    <li>Code in the Loop runs over and over again</li>
+                </ul>
+                </li>
+            </ul>
+
 
             ---
             ###Reference
@@ -534,7 +566,86 @@
 
         </script>
     </section>
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Imports
 
+            The first statement in our imports is an **include** statement.
+
+            ```C
+            #include "FastLED.h"
+            ```
+
+            This tells the compiler to include all the functions from the FastLED library when building the program for the
+            micro controller.
+
+            ---
+            ###Reference
+            [Arduino Library Reference] (https://www.arduino.cc/en/Reference/Libraries/)
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Constants
+
+            Next, we define some constants for our program
+
+            ```C
+            // Number of LEDs in the strip
+            #define NUM_LEDS 60
+
+            // Output pin for the LED Strip
+            #define DATA_PIN 6
+            ```
+
+            * These are just variables that we have no intention of changing while the program runs
+            * Why do you think we assign these values to variables instead of just using '60' or '6' all the time?  <!-- .element: class="delayed" -->
+
+            ---
+            ```C
+            // Comments in C++ are denoted using // marks
+
+            /*
+            * Multi line comments
+            * Can be added like this.
+            * Comments are ingored by the complier, and are there for you, when you go back to edit your program later.
+            */
+
+            // Comment often!
+            ```
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Setup
+
+   Setup is a function that runs once at the begining of a program. We know it is a function because it starts with a return type ( in this case void, because it doesn't return anything)
+            and is followed by a pair of braces (). The code inside setup is wrapped in {}
+
+            ```C
+            void setup() {
+
+            FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+
+            }
+            ```
+
+            This tells the compiler to include all the functions from the FastLED library when building the program for the
+            micro controller. We can include any number of libraries in our arduino program, that can help us do things like write to
+            permenant storage, monitor a sound frequeuency or send data over ethernet
+
+            ---
+            ###Reference
+            [Arduino Library Reference] (https://www.arduino.cc/en/Reference/Libraries/)
+
+
+        </script>
+    </section>
+    <!-- .element: class="delayed" -->
 </main>
 
 <script src="framework/scripts/jquery-1.11.0.min.js"></script>
