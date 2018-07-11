@@ -772,6 +772,103 @@
 
     </script>
     </section>
+
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Getting a signal
+
+            Earlier, we set a variable that corresponds to the input pin on the sensor. All we need to do now is to get the reading.
+
+            Because this is an analog sensor,  we can use the analogRead function
+            ```C
+
+            int sensor_value = analogRead(ANALOG_READ);
+
+            ```
+
+            Of course, it would be very helpful if we knew exactly what sort of signal we were getting!
+
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Serial Monitor
+
+
+            ```C
+            Serial.begin(9600);
+            ```
+            ```C
+            Serial.println(sensor_value);
+            ```
+
+            - What is the maximum value this microphone will read? What is the minimum?
+            <img src="framework/img/workshop/Monitor.png">
+
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Light some LEDs!
+
+            We're going to use the map function to figure out how many LED lights to light up
+
+            ```C
+            int sensor_value = analogRead(ANALOG_READ);
+
+            int numLedsToLight = map(sensor_value, 0, 737, 15, NUM_LEDS);
+
+            ```
+
+            <img src="framework/img/workshop/Monitor.png">
+
+
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Light some LEDs!
+
+            Then,we can use the exact same method we used before to light up the LEDs, only this time, we'll only light up the amount determined by our sensor value!
+
+            ```C
+            // First, clear the existing led values
+            FastLED.clear();
+            for (int led = 0; led < numLedsToLight; led++) {
+            leds[led] = CRGB(255, 255-2*led, 0+2*led);
+            }
+            FastLED.show();
+
+            ```
+            <img src="framework/img/workshop/Monitor.png">
+
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Make it Better!
+
+            This example is for a very, very basic version of the program! There lots of things we can do  to improve it
+            - Add a delay to smooth out the sensor reads
+            - Fine tune the max and min of the microphone
+            - Change colours according to the volume
+
+
+            ```
+            <img src="framework/img/workshop/Monitor.png">
+
+
+
+        </script>
+    </section>
     <!-- .element: class="delayed" -->
 </main>
 
