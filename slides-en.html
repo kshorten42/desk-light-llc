@@ -490,17 +490,29 @@
 
     <section class="slide two-col-list" data-markdown>
         <script type="text/template">
-            # Soldering Dos and Donts
-            - **DO**
-            - Keep hair and clothing tied up and out of the way
-            - Use small amounts of soldering compound
-            - Lay out all your components beforehand. Check the orientation of all components before soldering
-            - Wash your hands after using solder! Solder contains lead, which is a poisonous metal
+            <h1 id="solderingdosanddonts">Soldering Dos and Donts</h1>
 
-            - **DON'T**
-            - Touch the board or components directly with the hot iron.
-            - Rest the iron on your workbench, or near live components. Always return it to its holder.
-            - Breathe in the fumes from hot solder
+            <ul>
+                <li><p><strong>DO</strong></p></li>
+
+                <li><p>Keep hair and clothing tied up and out of the way</p></li>
+
+                <li><p>Use small amounts of soldering compound</p></li>
+
+                <li><p>Lay out all your components beforehand. Check the orientation of all components before
+                    soldering</p></li>
+
+                <li><p>Wash your hands after using solder! Solder contains lead, which is a poisonous metal</p></li>
+
+                <li><p><strong>DON'T</strong></p></li>
+
+                <li><p>Touch the board or components directly with the hot iron.</p></li>
+
+                <li><p>Rest the iron on your workbench, or near live components. Always return it to its holder.</p>
+                </li>
+
+                <li><p>Breathe in the fumes from hot solder</p></li>
+            </ul>
         </script>
     </section>
 
@@ -550,14 +562,28 @@
     </section>
     <section class="slide" data-markdown>
         <script type="text/template">
-            # C++
+            # C++ : Variables
 
             ```C
             // Variables
             int integer_variable = 9; // An Integer
             float float_variable = 2.3; // A decimal number
-            String a_string = "A string"; // A text STring
+            String a_string = "A string"; // A text String
+
+            #DEFINE A_CONSTANT 25 // Some kind of constant value
 ```
+
+            ---
+            ###Reference
+            [Arduino Language Reference] (https://www.arduino.cc/reference/en/)
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # C++ : Comments
+
 
             ```C
             // Comments in C++ are denoted using // marks
@@ -581,7 +607,7 @@
     </section>
     <section class="slide" data-markdown>
         <script type="text/template">
-            # C++
+            # C++: IF
 
             ```C
             // Control Flow
@@ -593,9 +619,27 @@
                 // Code to run if nothing else was true
             }
 
+
+            ```
+
+            Remember: Every time you open a  bracket { .... you have to close it again! } <!-- .element: class="note" -->
+
+            ---
+            ###Reference
+            [Arduino Language Reference] (https://www.arduino.cc/reference/en/)
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # C++: FOR
+
+            ```C
+
             // Loops
             for ( int i = 0 ; i < 10; i++) {
-                // The loop increment i by one each time it runs until i is less than 10
+            // The loop increment i by one each time it runs until i is less than 10
             }
 
             ```
@@ -652,8 +696,7 @@
 
             ---
             ###Reference
-            [Arduino Library Reference] (https://www.arduino.cc/en/Reference/Libraries/)
-
+            Arduino Library Reference:<!-- .element: class="note" --> https://www.arduino.cc/en/Reference/Libraries/  <!-- .element: class="note" -->
 
         </script>
     </section>
@@ -674,7 +717,6 @@
             * These are just variables that we have no intention of changing while the program runs
             * Why do you think we assign these values to variables instead of just using '60' or '6' all the time?  <!-- .element: class="delayed" -->
 
-            ---
 
         </script>
     </section>
@@ -691,13 +733,13 @@
             ```
 
 
-   Setup is a function that runs once at the begining of a program. We know it is a function because it starts with a return type ( in this case void, because it doesn't return anything)
-            and is followed by a pair of braces (). The code inside setup is wrapped in {}
+            - Setup is a function that runs once at the begining of a program.
+            - We know it is a function because:
+            - It starts with a return type (in this case void, because it doesn't return anything)
+            - Tt is followed by a pair of braces (). The code inside setup is wrapped in {}
 
 
-            ---
-            ###Reference
-            [Arduino Library Reference] (https://www.arduino.cc/en/Reference/Libraries/)
+
 
 
         </script>
@@ -708,14 +750,16 @@
             ```C
             void loop() {
                 // Turn the LED on, then pause
-                for (int i = 0; i < NUM_LEDS; i++)
-                    leds[i] = CRGB(0, 255-2*i, 0+2*i);
+            for (int led = 0; led < NUM_LEDS; led++){
+            leds[led] = CRGB(0, 255-2*led, 0+2*led);
+            }
                 FastLED.show();
                 delay(500);
 
                 // Now turn the LED off, then pause
-                for (int i = 0; i < NUM_LEDS; i++)
-                    leds[i] = CRGB::Black;
+            for (int led = 0; i < NUM_LEDS; led++) {
+            leds[led] = CRGB::Black;
+            }
                 FastLED.show();
                 delay(500);
             }
@@ -738,12 +782,13 @@
 
             ```C
             // Turn the LED on, then pause
-            for (int i = 0; i < NUM_LEDS; i++)
-                leds[i] = CRGB(0,200, 100);
+            for (int led = 0; led < NUM_LEDS; led++) {
+            leds[led] = CRGB(0,200, 100);
+            }
             FastLED.show();
             delay(500);
 
-            }
+
             ```
             <ul>
                 <li class="delayed"> In **setup** we told the program that our LED strip was stored in the array  ``` leds``` </li>
@@ -753,24 +798,32 @@
                 </ul>
                 <li class="delayed"> ``` FastLED.show()``` then tells the program to turn on all the LEDs with the colours we just set in the loop </li>
             </ul>
-            ----
+
+            ---
             ###Reference
-            FastLED Documentation: [http://fastled.io/docs/3.1/] (http://fastled.io/docs/3.1/)
+            FastLED Documentation:<!-- .element: class="note" --> http://fastled.io/docs/3.1/ <!-- .element: class="note" -->
 
         </script>
     </section>
-    <script type="text/template">
-        # Change the colours yourself
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Change the colours yourself
+            <img src="framework/img/workshop/rgb.png" align="right" width="300px"/>
 
-        - Change the numbers in the CRGB to change the colour of the blink
-        - Use variables to make the colours change along the strip!
+            - Change the numbers in the CRGB to change the colour of the blink.
+            - The RGB in CRGB stands for Red, Blue and Green
+            - Each number can go go from 0 to 255
+            - <span style="color:rgb(200,0,255);">Purple: CRGB(200, 0, 255)</span>;
+            - <span style="color:rgb(0,200,0);">Green: CRGB( 0, 200, 0)</span>;
+            - <span style="color:rgb(0,225,255);">Turquoise: CRGB(0, 225, 255)</span>;
+            - <span style="color:rgb(255,110,0);">Orange: CRGB(255,110,0)</span>;
+            - Use variables to make the colours change along the strip!
 
+            ---
+            ###Reference
+            Color Picker<!-- .element: class="note" --> : https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool <!-- .element: class="note" -->
 
-        ---
-        ###Reference
-        Color Picker: [https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool] (https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool)
-
-    </script>
+        </script>
     </section>
 
     <section class="slide" data-markdown data-toc>
@@ -798,14 +851,23 @@
 
 
             ```C
+            void setup() {
             Serial.begin(9600);
+            // ...
+            }
             ```
             ```C
+            void loop() {
+            // ...
             Serial.println(sensor_value);
+            }
             ```
+            <img src="framework/img/workshop/Monitor.PNG" align="right">
 
             - What is the maximum value this microphone will read? What is the minimum?
-            <img src="framework/img/workshop/Monitor.png">
+
+            In Arduino create, the monitor can be found in the left hand menu. In the offline IDE, you can find it under tools > monitor <!-- .element: class="note" -->
+
 
 
 
@@ -824,8 +886,8 @@
 
             ```
 
-            <img src="framework/img/workshop/Monitor.png">
-
+            - Map() re-maps a number from one range to another.
+            - We're mapping the sensor value onto the the number of LEDs we want to light up
 
 
         </script>
@@ -841,12 +903,12 @@
             // First, clear the existing led values
             FastLED.clear();
             for (int led = 0; led < numLedsToLight; led++) {
+            // put some fancy colour changes in there
             leds[led] = CRGB(255, 255-2*led, 0+2*led);
             }
             FastLED.show();
 
             ```
-            <img src="framework/img/workshop/Monitor.png">
 
 
 
@@ -854,18 +916,54 @@
     </section>
     <section class="slide" data-markdown data-toc>
         <script type="text/template">
+            # The Full Code
+
+
+            ```C
+            #include
+            <FastLED.h>
+                #define DATA_PIN 6
+                #define ANALOG_READ 0
+                #define NUM_LEDS 73
+                CRGB leds[NUM_LEDS];
+
+                void setup() {
+                Serial.begin(9600);
+                // put your setup code here, to run once:
+                FastLED.addLeds
+                <NEOPIXEL
+                , DATA_PIN>(leds, NUM_LEDS);
+                }
+                void loop() {
+                int sensor_value = analogRead(ANALOG_READ);
+                int numLedsToLight = map(sensor_value, 0, 737, 0, NUM_LEDS);
+
+                // First, clear the existing led values
+                FastLED.clear();
+                for (int led = 0; led < numLedsToLight; led++) {
+                leds[led] = CRGB(255, 255-2*led, 0+2*led);
+                }
+                FastLED.show();
+                delay(3);
+                }
+
+                ```
+
+
+        </script>
+    </section>
+
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
             # Make it Better!
 
             This example is for a very, very basic version of the program! There lots of things we can do  to improve it
-            - Add a delay to smooth out the sensor reads
+
+            - Use a smoothing function on the sensor reads
+            - Add a delay to the loop
             - Fine tune the max and min of the microphone
             - Change colours according to the volume
-
-
-            ```
-            <img src="framework/img/workshop/Monitor.png">
-
-
+            - ???
 
         </script>
     </section>
