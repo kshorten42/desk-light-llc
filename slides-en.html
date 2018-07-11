@@ -381,10 +381,17 @@
         <script type="text/template">
             # Testing the Circuit
 
-            1. Open **Arduino Create** [https://create.arduino.cc/]https://create.arduino.cc/
+            ## Online (Best Option)
+
+            1. Open **Arduino Create** [https://create.arduino.cc/](https://create.arduino.cc/)
             1. Login and go to the Arduino Web Editor
             1. If you have not already installed the Arduino plugin, do so now
 
+            It's important to use either Chrome or Firefox when working with Arduino Create <!-- .element: class="note" -->
+
+            ## Offline
+
+            1. Download the Arduino IDE: <a href="https://www.arduino.cc/en/Main/Software">https://www.arduino.cc/en/Main/Software</a>
         </script>
     </section>
 
@@ -416,21 +423,21 @@
 
             void setup() {
 
-            FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+                FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
 
             }
 
             void loop() {
-            // Turn the LED on, then pause
-            for (int i = 0; i < NUM_LEDS; i++)
-            leds[i] = CRGB(0, 255-2*i, 0+2*i);
-            FastLED.show();
-            delay(500);
-            // Now turn the LED off, then pause
-            for (int i = 0; i < NUM_LEDS; i++)
-            leds[i] = CRGB::Black;
-            FastLED.show();
-            delay(500);
+                // Turn the LED on, then pause
+                for (int i = 0; i < NUM_LEDS; i++)
+                leds[i] = CRGB(0, 255-2*i, 0+2*i);
+                FastLED.show();
+                delay(500);
+                // Now turn the LED off, then pause
+                for (int i = 0; i < NUM_LEDS; i++)
+                leds[i] = CRGB::Black;
+                FastLED.show();
+                delay(500);
             }
 
 
@@ -447,12 +454,15 @@
 
             1. Plug in your Arduino board using the provided USB cable
             1. Go to the Editor panel and click the dropdown menu to select your Arduino Board
-            1. Choose 'Board at COM3' (Windows) or 'Board at [fill in the correct mac thing here]' (Mac)
+            1. Choose 'Board at COM3' (Windows) or 'Board at Serial Port ___' (Mac)
             <img src="framework/img/workshop/arduino_create2.PNG">
-            1. Select COM3 / [fill in the correct mac thing here] under Ports
+            1. Select COM3 / Serial Port  under Ports
             1. Select the correct Arduino board under Boards (Check with your instructor if you are unsure which Ardunio board is being used in this workshop)
 
         </script>
+
+        ---
+        Mac Users: There may be more than one serial port listed. If the first port you try does not work, try the others until your code is uploaded successfully <!-- .element: class="note" -->
     </section>
 
     <section class="slide" data-markdown>
@@ -525,11 +535,72 @@
 
             Sketches are written in C++.
 
-            C++ is a *compiled* language. That means we have to run the program through a compiler, that reduces the C++
+            C++ is a *compiled* language. That means we have to run the program through a compiler. The Compiler reduces the C++
             code to machine language that can be directly executed by the CPU of the microcontroller.
 
             This is different from other languages that you may have worked with, like Python or Javascript, which are
             intrepreted languages, which the computer 'compiles' line by line when you run it.
+
+            ---
+            ###Reference
+            [Arduino Language Reference] (https://www.arduino.cc/reference/en/)
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # C++
+
+            ```C
+            // Variables
+            int integer_variable = 9; // An Integer
+            float float_variable = 2.3; // A decimal number
+            String a_string = "A string"; // A text STring
+```
+
+            ```C
+            // Comments in C++ are denoted using // marks
+
+            /*
+            * Multi line comments
+            * Can be added like this.
+            * Comments are ingored by the complier, and are there for you, when you go back to edit your program later.
+            */
+
+            // Comment often!
+            ```
+
+
+            ---
+            ###Reference
+            [Arduino Language Reference] (https://www.arduino.cc/reference/en/)
+
+
+        </script>
+    </section>
+    <section class="slide" data-markdown>
+        <script type="text/template">
+            # C++
+
+            ```C
+            // Control Flow
+            if ( statement == true) {
+                // Some Code
+            } else if ( condition_2) {
+                // Some Other Code
+            } else {
+                // Code to run if nothing else was true
+            }
+
+            // Loops
+            for ( int i = 0 ; i < 10; i++) {
+                // The loop increment i by one each time it runs until i is less than 10
+            }
+
+            ```
+            - Q: How many times will this loop run?
+            - A: 10 times ( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9) <!-- .element: class="delayed" -->
 
             ---
             ###Reference
@@ -549,7 +620,7 @@
                 </ul>
                 </li>
                 <li>Setup: <!-- .element: class="delayed" --><ul>
-                    <li>Code in Setup runs once at the beginning of the program. This is the place where we will tell the program important information, like which pins our LED strip is attached to\</li>
+                    <li>Code in Setup runs once at the beginning of the program. This is the place where we will tell the program important information, like which pins our LED strip is attached to.</li>
                 </ul>
                 </li>
                 <li>Loop: <!-- .element: class="delayed" --><ul>
@@ -604,17 +675,6 @@
             * Why do you think we assign these values to variables instead of just using '60' or '6' all the time?  <!-- .element: class="delayed" -->
 
             ---
-            ```C
-            // Comments in C++ are denoted using // marks
-
-            /*
-            * Multi line comments
-            * Can be added like this.
-            * Comments are ingored by the complier, and are there for you, when you go back to edit your program later.
-            */
-
-            // Comment often!
-            ```
 
         </script>
     </section>
@@ -622,21 +682,18 @@
     <section class="slide" data-markdown data-toc>
         <script type="text/template">
             # Setup
-
-   Setup is a function that runs once at the begining of a program. We know it is a function because it starts with a return type ( in this case void, because it doesn't return anything)
-            and is followed by a pair of braces (). The code inside setup is wrapped in {}
-
             ```C
             void setup() {
 
-            FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+                FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
 
             }
             ```
 
-            This tells the compiler to include all the functions from the FastLED library when building the program for the
-            micro controller. We can include any number of libraries in our arduino program, that can help us do things like write to
-            permenant storage, monitor a sound frequeuency or send data over ethernet
+
+   Setup is a function that runs once at the begining of a program. We know it is a function because it starts with a return type ( in this case void, because it doesn't return anything)
+            and is followed by a pair of braces (). The code inside setup is wrapped in {}
+
 
             ---
             ###Reference
@@ -644,6 +701,76 @@
 
 
         </script>
+    </section>
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Loop
+            ```C
+            void loop() {
+                // Turn the LED on, then pause
+                for (int i = 0; i < NUM_LEDS; i++)
+                    leds[i] = CRGB(0, 255-2*i, 0+2*i);
+                FastLED.show();
+                delay(500);
+
+                // Now turn the LED off, then pause
+                for (int i = 0; i < NUM_LEDS; i++)
+                    leds[i] = CRGB::Black;
+                FastLED.show();
+                delay(500);
+            }
+            ```
+
+            Loop runs over and over again. Once we get to the end of this set of code instructions, the program goes back up to the top and starts it all over again
+
+            <img src="framework/img/workshop/A_blink_program_through_LED.gif">
+
+
+
+        </script>
+    </section>
+    </section>
+    <section class="slide" data-markdown data-toc>
+        <script type="text/template">
+            # Getting Some Output
+
+            - How are we getting this light and these colours anyway? Anybody want to guess based on the code below?
+
+            ```C
+            // Turn the LED on, then pause
+            for (int i = 0; i < NUM_LEDS; i++)
+                leds[i] = CRGB(0,200, 100);
+            FastLED.show();
+            delay(500);
+
+            }
+            ```
+            <ul>
+                <li class="delayed"> In **setup** we told the program that our LED strip was stored in the array  ``` leds``` </li>
+                <li class="delayed"> Next, we use a **loop** to set a colour for each of our leds  </li>
+                <ul>
+                    <li class="delayed">  CRGB is a way of saying use these RGB color values      </li>
+                </ul>
+                <li class="delayed"> ``` FastLED.show()``` then tells the program to turn on all the LEDs with the colours we just set in the loop </li>
+            </ul>
+            ----
+            ###Reference
+            FastLED Documentation: [http://fastled.io/docs/3.1/] (http://fastled.io/docs/3.1/)
+
+        </script>
+    </section>
+    <script type="text/template">
+        # Change the colours yourself
+
+        - Change the numbers in the CRGB to change the colour of the blink
+        - Use variables to make the colours change along the strip!
+
+
+        ---
+        ###Reference
+        Color Picker: [https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool] (https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool)
+
+    </script>
     </section>
     <!-- .element: class="delayed" -->
 </main>
